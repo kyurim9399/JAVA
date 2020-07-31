@@ -8,8 +8,8 @@ import java.sql.SQLException;
 public class ConnectDB {
 	private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:XE";
-	private static final String USER = "scott";
-	private static final String PASSWORD = "tiger";
+	private static final String USER = "library";
+	private static final String PASSWORD = "1234";
 	
 	static Connection conn = null;
 	

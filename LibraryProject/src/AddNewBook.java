@@ -18,11 +18,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.awt.CardLayout;
 import java.awt.Color;
 
 import javax.swing.JButton;
@@ -30,50 +30,41 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 
 
-public class AddNewBook extends JFrame{
-	String[] b_col = {"Book ID", "Book Name", "Author", "Publisher", "Date Acquired", "Subjects"};
-	String[] sub = {"-----select-----", "General Fiction", "Mystery", "Romance", "Graphic Books", "Science Fiction", "French Fiction"};
-	String bookName, author, publisher, subjects, date;
-	int bookID;
-	SimpleDateFormat dateformat = new SimpleDateFormat ("yyyy-MM-dd");
+public class AddNewBook extends JPanel{
+	private String[] b_col = {"Book ID", "Book Name", "Author", "Publisher", "Quantity", "Date Acquired", "Subjects"};
+	private	String[] sub = {"-----select-----", "General Fiction", "Mystery", "Romance", "Biography", "Science Fiction", "History"};
+	private	String bookName, author, publisher, subjects, date, sameBookId;
+	private	int quantity;
+	private	SimpleDateFormat dateformat = new SimpleDateFormat ("yyyy-MM-dd");
 	
-	JLabel b_title;
-	JLabel[] b_lb = new JLabel[6];
-	JTextField[] b_tf = new JTextField[5];
-	JComboBox<String> sub_combo;
-	JButton b_add, b_cancle; 
+	private	JLabel title;
+	private	JLabel[] b_lb = new JLabel[b_col.length];
+	private	JTextField[] b_tf = new JTextField[b_col.length-1];
+	private	JComboBox<String> sub_combo;
+	private	JButton b_add, b_cancle; 
 	
-	
-	
-	
+
+
 	public AddNewBook() {
-		super("Add New Book");
-		setBounds(600, 200, 1000, 700);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(780 ,590);
 		setLayout(null);
 		
-		
-		//set Title
-		b_title = new JLabel("Add New Book", SwingConstants.CENTER);
-		b_title.setFont(new Font("Consolas", Font.BOLD, 50));
-		//b_title.setForeground(Color.blue);
-		b_title.setBounds(0, 50, 1000, 50);
-		add(b_title);
-		
+		setTitle();
 
 		// set Labels
-		for(int i = 0; i < b_col.length; i++) {
+		for(int i = 0; i < b_lb.length; i++) {
 			b_lb[i] = new JLabel(b_col[i]);
 			b_lb[i].setFont(new Font("Consolas", 0, 20));
 			add(b_lb[i]);
 		}
-		b_lb[0].setBounds(200, 150, 200, 30);
-		for(int i = 1; i< b_col.length; i++) {
+		b_lb[0].setBounds(140, 70, 150, 25);
+		for(int i = 1; i< b_lb.length; i++) {
 			b_lb[i].setBounds(b_lb[0].getX(), b_lb[i-1].getY() + 50, b_lb[0].getWidth(), b_lb[0].getHeight());
 		}
 		
@@ -83,19 +74,18 @@ public class AddNewBook extends JFrame{
 		
 		for(int i = 0; i < b_tf.length; i++) {
 			b_tf[i] = new JTextField();
-			b_tf[i].setFont(new Font("Consolas", 0, 20));
+			b_tf[i].setFont(new Font("Consolas", 0, 15));
 			add(b_tf[i]);
 		}
-		b_tf[0].setText(String.format("%05d", getBookID()));
 		b_tf[0].setForeground(Color.LIGHT_GRAY);
 		b_tf[0].setEditable(false);
 		
 		date = dateformat.format(System.currentTimeMillis());
-		b_tf[4].setText(date);
-		b_tf[4].setForeground(Color.LIGHT_GRAY);
-		b_tf[4].setEditable(false);
+		b_tf[5].setText(date);
+		b_tf[5].setForeground(Color.LIGHT_GRAY);
+		b_tf[5].setEditable(false);
 		
-		b_tf[0].setBounds(400, 150, 400, 30);
+		b_tf[0].setBounds(340, 70, 250, 25);
 		for(int i = 1; i< b_tf.length; i++) {
 			b_tf[i].setBounds(b_tf[0].getX(), b_tf[i-1].getY() + 50, b_tf[0].getWidth(), b_tf[0].getHeight());
 		}
@@ -103,9 +93,10 @@ public class AddNewBook extends JFrame{
 
 		// set comboBox
 		sub_combo = new JComboBox<String> (sub);
-		sub_combo.setBounds(b_tf[0].getX(), b_tf[4].getY() + 50, b_tf[0].getWidth(), b_tf[0].getHeight());
+		sub_combo.setBounds(b_tf[0].getX(), b_tf[b_tf.length - 1].getY() + 50, b_tf[0].getWidth(), b_tf[0].getHeight());
 		sub_combo.setFont(new Font("Consolas", 0, 20));
 		add(sub_combo);
+		
 		
 		
 		// set button
@@ -115,23 +106,59 @@ public class AddNewBook extends JFrame{
 		b_add.setFont(new Font("Consolas", 0, 20));
 		b_cancle.setFont(new Font("Consolas", 0, 20));
 		
-		b_add.setBounds(350, sub_combo.getY() + 150, 100, 50);
-		b_cancle.setBounds(550, sub_combo.getY() + 150, 100, 50);
+		b_add.setBounds(240, sub_combo.getY() + 70, 100, 40);
+		b_cancle.setBounds(440, sub_combo.getY() + 70, 100, 40);
+		
+		b_add.setBackground(Color.orange);
+		b_cancle.setBackground(Color.orange);
+		
+		b_add.setForeground(Color.white);
+		b_cancle.setForeground(Color.white);
+		
 		add(b_add); add(b_cancle);
 		
 
+		
 		
 		// button Event
 		b_add.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				String[] err = {"","","","",""};
+				boolean valid = true;
+				// get data from TextField
 				bookName = b_tf[1].getText();
 				author = b_tf[2].getText();
 				publisher = b_tf[3].getText();
 				subjects = sub_combo.getSelectedItem().toString();
 				
-				String[] err = {"","","",""};
-				boolean valid = true;
+				
+				
+				
+				// check the null and valid values
+				if(b_tf[4].getText().equals("")) {
+					err[4] = "Quantity";
+					valid = false;
+				}
+				else {
+					try {
+						quantity =  Integer.parseInt(b_tf[4].getText());
+						if(quantity > 999 || quantity < 1) {
+							JOptionPane.showMessageDialog(null, "1~999사이의 숫자를 입력해주세요.", "Message", JOptionPane.INFORMATION_MESSAGE);
+							b_tf[4].setText("");
+							b_tf[4].requestFocus();
+							return;
+						}
+					}catch (NumberFormatException e1) {
+						JOptionPane.showMessageDialog(null, "Quantity에 숫자를 입력해 주세요.", "Message", JOptionPane.INFORMATION_MESSAGE);
+						 b_tf[4].setText("");
+						 b_tf[4].requestFocus();
+						 return;
+					}
+			
+				}
+
+
 				if(bookName.equals("")){
 					err[0] = "Book Name";
 					valid = false;
@@ -149,16 +176,34 @@ public class AddNewBook extends JFrame{
 					valid = false;
 				}
 				
+				
+				
+				
+				// if there don't have any empty field
 				if(valid) {
-					insert();
-					b_tf[0].setText(String.format("%05d", getBookID()));
-					JOptionPane.showMessageDialog(null, "책이 등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
-					b_tf[1].setText("");
-					b_tf[2].setText("");
-					b_tf[3].setText("");
-					sub_combo.setSelectedIndex(0);
-					
+					// check there are existing book
+					if(isSame()) {
+						int result = JOptionPane.showConfirmDialog(null, "같은 책이 존재합니다. 더 추가하시겠습니까?", "확인메세지창", JOptionPane.YES_NO_OPTION);
+						if(result == 0) {
+							addBook();
+							JOptionPane.showMessageDialog(null, bookName + "책이 " + quantity + "권 더 추가 되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+						}else if(result == 1) {
+							JOptionPane.showMessageDialog(null, "책이 등록이 취소되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+						}
+					}// issue new book
+					else {
+						int result = JOptionPane.showConfirmDialog(null, "책을 등록하시겠습니까?", "확인메세지창", JOptionPane.YES_NO_OPTION);
+
+						if(result == 0) {
+							addBook();
+							JOptionPane.showMessageDialog(null,bookName +  "책이 등록되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+						}else if(result == 1) {
+							JOptionPane.showMessageDialog(null, "책 등록이 취소되었습니다.", "Message", JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+					setEmpty();
 				}
+				// if there have empty fields, an error message appeared 
 				else {
 					String errmsg = "";
 					for(int i = 0; i < err.length; i++) {
@@ -178,104 +223,141 @@ public class AddNewBook extends JFrame{
 		
 		
 		b_cancle.addActionListener(new ActionListener() {
-			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				b_tf[0].setText(String.format("%05d", getBookID()));
-				for(int i = 1; i<b_tf.length-1; i++) {
-					b_tf[i].setText("");
+				int result = JOptionPane.showConfirmDialog(null, "책 입력을 취소하시겠습니까?", "Confirm Message", JOptionPane.YES_NO_OPTION);
+
+				if(result == 0) {
+					JOptionPane.showMessageDialog(null, "책 등록이 취소되었습니다.", "Message", JOptionPane.PLAIN_MESSAGE);
+					setEmpty();
 				}
-				sub_combo.setSelectedIndex(0);
-				
 			}
 		});
-		
-		
-		
-		
 		
 		setVisible(true);
 	}
 	
 	
-	public static void main(String[] args) {
-		new AddNewBook();
+	private void setTitle() {
+		title = new JLabel("Add New Book");
+		title.setBounds(30, 10, 150, 20);
+		title.setFont(new Font("Consolas", Font.BOLD, 20));
+		add(title);
 	}
 
 
-	public void insert() {
-		Connection conn = ConnectDB.getConnection();
-		
-		StringBuffer sql = new StringBuffer();
-		sql.append("insert into books ");
-		sql.append("values (?, ?, ?, ?, ?, ?) ");
-		
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(sql.toString());
-			pstmt.setInt(1, bookID);
-			pstmt.setString(2, bookName);
-			pstmt.setString(3, author);
-			pstmt.setString(4, subjects);
-			pstmt.setString(5, publisher);
-			pstmt.setString(6, date);
+	public void addBook() {
+		for(int i = 0; i < quantity; i++) {
+			Connection conn = ConnectDB.getConnection();
 			
+			StringBuffer sql = new StringBuffer();
+			sql.append("insert into book ");
+			sql.append("values (?, ?, ?, ?, ?, ?) ");
 			
-			int result = pstmt.executeUpdate();	
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+			PreparedStatement pstmt = null;
 			try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setString(1, getBookID());
+				pstmt.setString(2, bookName);
+				pstmt.setString(3, author);
+				pstmt.setString(4, publisher);
+				pstmt.setString(5,subjects);
+				pstmt.setString(6, date);
+				
+				int result = pstmt.executeUpdate();	
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} finally {
+				try {
+					if(pstmt != null) pstmt.close();
+					if(conn != null) conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
-	}
+	} // addBook() end
 	
 	
-	public int getBookID() {
-		Connection conn = ConnectDB.getConnection();
-
-		String sql = "Select count(bookid) from books";
+	public String getBookID() {
+		// 1. subject 구분
+		String[] subCode = {"----------", "GFI", "MYS", "ROM", "BIO", "SFI", "HIS"};
+		int index = sub_combo.getSelectedIndex();
+		String bookId = subCode[index];
+				
+		Connection conn = ConnectDB.getConnection();		
 		
-		PreparedStatement pstmt = null;
-		try {
-			pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				bookID = rs.getInt(1) + 1; 
-			}
+		if(!isSame()) {
+			StringBuffer sql = new StringBuffer();
+			sql.append("Select count(DISTINCT substr(bookid,1,8)) from book where SUBJECTS = ? ");
+
 			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
+			PreparedStatement pstmt = null;
+			
 			try {
-				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
+				pstmt = conn.prepareStatement(sql.toString());
+				pstmt.setString(1, sub[index]);
+
+				ResultSet rs = pstmt.executeQuery();
+				rs.next();
+				bookId += String.format("%05d", rs.getInt(1) + 1 ) + "001";
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			}finally {
+				try {
+					if(pstmt != null) pstmt.close();
+					if(conn != null) conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
-		return bookID;
-	}
+		else {	
+			bookId = sameBookId.substring(0, 8);
+			
+			String sql2 = "Select count(bookid) from book where substr(bookid,1,8) = ? ";
+			
+			PreparedStatement pstmt2 = null;
+			try {
+				pstmt2 = conn.prepareStatement(sql2);
+				pstmt2.setString(1, bookId);
+				ResultSet rs = pstmt2.executeQuery();
+				rs.next();
+				bookId += String.format("%03d", rs.getInt(1) + 1 );
+				
+				
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				try {
+					if(pstmt2 != null) pstmt2.close();
+					if(conn != null) conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
+		}
+		
+		return bookId;
+	}//getBookID() end
 	
 	
 	public boolean isSame() {
-		
+		boolean result = false;
 		Connection conn = ConnectDB.getConnection();
 
-		
 		StringBuffer sql = new StringBuffer();
-		sql.append("Select bookid from books ");
+		sql.append("Select bookid from book ");
 		sql.append("where bookname = ? and author = ? and subjects = ? and publisher = ? ");
 
-		
 		PreparedStatement pstmt = null;
 		try {
 			pstmt= conn.prepareStatement(sql.toString());
@@ -285,10 +367,10 @@ public class AddNewBook extends JFrame{
 			pstmt.setString(4, publisher);
 			
 			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()) {
-				
-			}
 			
+			result = rs.next()? true : false;
+			
+			if(result) sameBookId = rs.getString(1);	
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -301,7 +383,14 @@ public class AddNewBook extends JFrame{
 				e.printStackTrace();
 			}
 		}
-		return true;
-	}
+		return result;
+	}//isSame() end
 	
+	
+	public void setEmpty() {
+		for(int i = 0; i<b_tf.length-1; i++) {
+			b_tf[i].setText("");
+		}
+		sub_combo.setSelectedIndex(0);
+	} // setEmpty() end
 }
