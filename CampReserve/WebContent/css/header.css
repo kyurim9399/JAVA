@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+#menudiv
+{
+	position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: #fff;
+    box-shadow: 0px 3px 16px 0px rgba(0, 0, 0, 0.1);
+}
+#nav
+{
+	overflow: hidden;
+	background: transparent !important;
+    padding-left: 75px;
+}
+#nd1, #nd2 a
+{
+	float: left;
+}
+#nd3
+{
+	float: right;
+	margin: 15px 20px 0 0;
+}
+#nd1
+{
+	padding: 4px 0;
+}
+
+.logo{
+	width: auto; height: auto;
+    max-width: 128px;
+    max-height: 72px;
+}
+
+#nd2 a
+{
+	color: #263a4f;
+	font-size: 16px;
+	padding: 20px 5px;
+	margin-left: 50px;
+	line-height: 45px;
+	letter-spacing: -1px;
+}
+a{text-decoration: none;}
+#login
+{
+	height: 46px;
+	color: white;
+	background-color: #002130;
+	font-style: italic;
+}
+
+

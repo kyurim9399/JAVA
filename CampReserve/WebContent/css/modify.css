@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+*
+{margin: 0;}
+#title, #file
+{
+	padding: 0;
+	width: 50%;
+	height: 20px;
+}
+#reviewMain
+{
+	width: 80%;
+	height: 700px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+#reTit
+{
+	padding: 0 0 10px 7px;
+	border-bottom: 1px solid black;
+	margin-top: 80px;
+}
+.row
+{
+	height: 35px;
+	border-bottom: 1px solid #D5D5D5;
+	overflow: hidden;
+}
+#row_contents
+{
+	height: 208px;
+	border-bottom: 1px solid #D5D5D5;
+	overflow: hidden;
+	
+}
+.left
+{
+	width: 10%;
+	height: 100%;
+	background-color: #f4f3f1;
+	
+	clear: both;
+	float: left;
+		
+	padding-left: 12px;	
+	line-height: 35px;
+}
+.right
+{
+	width: 86%;
+	height: 100%;
+	float: left;
+	
+	padding-left: 12px;	
+	line-height: 35px;
+}
+
+#lastrow
+{
+	text-align: center;
+	margin-top: 30px;
+}
+
+#go
+{
+	width: 200px;
+	height: 50px;
+    font-size: 17px;
+	background-color: #2B2B2B;
+	color: white;
+	border-radius: 7px;
+}
+#back
+{
+	width: 200px;
+	height: 50px;
+    font-size: 17px;
+	background-color: #F8F8F8;
+	color: black;
+	border-radius: 7px;
+}
+.starR{
+  background: url('http://miuu227.godohosting.com/images/icon/ico_review.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{background-position:0 0;}

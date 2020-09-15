@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+#main
+{
+	position: absolute;
+	left:0px;
+	top:0px;
+	width: 100%;
+	height: 100%;
+	background-image: url("http://www.seoulcamp.co.kr/img_up/shop_pds/seoulcamp/design/main/img/main_bg_01.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center center;
+}
+#campground
+{
+	position: absolute;
+	font-family: 'Playfair Display', serif;
+	font-size: 80px;
+	font-weight: 900;
+	color: white;
+	left: 110px;
+	top: 290px;
+	letter-spacing: -4px;
+	
+}
+#campground_1
+{
+	position: absolute;
+	font-size: 28px;
+	font-weight: 400;
+	color: white;
+	left: 110px;
+	top: 410px;
+	letter-spacing: -1px;
+}
+#campground_2
+{
+	position: absolute;
+	font-size: 17px;
+	font-weight: 400;
+	color: rgb(217, 217, 217);
+	left: 110px;
+	top: 545px;
+	letter-spacing: -1px;
+}

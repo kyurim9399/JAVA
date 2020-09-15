@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+#d1
+{
+	width: 80%;
+	margin: 0 auto 200px;
+	border-top: 1px solid black;
+	/* border-bottom: 1px solid black; */
+}
+#d2
+{
+	padding-left: 10px;
+	overflow: hidden;
+}
+#d2 h1
+{
+	font-size: 16px;
+	color: #777;
+	text-shadow: 0 1px 0 rgba(0,0,0,0);
+}
+#d_th_no, #d_th_title, #d_th_score, #d_th_name, #d_th_regdate, #d_th_hits
+{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	float: left;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 12px 0;
+	background-color: #f4f3f1;
+}
+.low
+{
+	clear: both;
+	overflow: hidden;
+	border-bottom: 1px solid black;
+	
+}
+.d_td_no, .d_td_title, .d_td_score, .d_td_name, .d_td_regdate, .d_td_hits
+{
+	float: left;
+	text-align: center;
+	font-size: 13px;
+	font-weight: bold;
+	padding: 12px 0;
+	background-color: white;
+	color:#000000;
+}
+.d_td_title
+{
+	text-align: inherit;
+	text-indent: 40px;
+}
+#d_th_no, .d_td_no
+{
+	width: 6%;
+}
+#d_th_title, .d_td_title
+{
+	width: 56%;
+}
+#d_th_score, .d_td_score
+{
+	width: 9%;
+}
+#d_th_name, .d_td_name
+{
+	width: 15%;
+}
+#d_th_regdate, .d_td_regdate
+{
+	width: 8%;
+}
+#d_th_hits, .d_td_hits
+{
+	width: 6%;
+}
+.d_td_title a
+{
+	text-decoration: none;
+}
+#d_btn
+{
+	padding-top: 10px;
+	clear: both;
+	float: right;
+}
+#selectdiv
+{
+	float: right;
+	margin-top: 6px;
+}
+#sel
+{
+	width: 100px;
+    height: 30px;
+}
+#page
+{
+	text-align: center;
+	clear: both;
+	padding-top: 20px;
+}
+.pageNo
+{
+	display: inline-block;
+    border: 1px solid #aaa;
+    background: white;
+    color: #83878a;
+    width: 36px;
+	height: 36px;
+	line-height: 36px;
+	font-family: Arial,sans-serif;
+	font-size: .875em;
+}
+#img1
+{
+	width: 100%;
+}
+#hmain h1, #hmain h2
+{
+	margin: 0;
+}
+h2{font-weight: 500;}
+#hmain
+{
+	width: 1200px;
+	margin: 60px auto 140px;
+	border-bottom: 5px solid #000C00;
+	overflow: hidden;
+}
+#hmain_1, #hmain_2
+{
+	float:left;
+	padding: 0 15px;
+	width: 46%;
+}
+#hdiv1
+{
+	font-size: 48px;
+	font-family: 'Playfair Display', serif;
+}
+#hdiv2
+{
+	font-size: 25px;
+	letter-spacing: -1px;
+	margin-bottom: 40px;
+}
